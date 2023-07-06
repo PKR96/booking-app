@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit {
           if(data && 200 == data.status){
             const user = data.body;
             if(user){
+              console.log(user)
             this.authService.setJwt(user.token);
             const userParam = encodeURIComponent(JSON.stringify(user));
             this.router.navigate(['/dashboard',{queryParams: {user: userParam}}]);

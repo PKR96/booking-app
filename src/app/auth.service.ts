@@ -24,7 +24,7 @@ export class AuthService {
 
   public isJWTValid(token:string):boolean{
     try{
-      jwt.isValid(token, this.getJwt);
+      jwt.verify(token, this.getJwt);
       return true;
     }
     catch(error){
