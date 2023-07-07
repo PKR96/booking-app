@@ -8,16 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  user: any;
-
-  constructor(private route: ActivatedRoute){
-
-  }
+  userName: any;
+  selectedDate: Date | undefined;
+  today: Date = new Date();
+  
 
   ngOnInit(): void {
-    const user = this.route.snapshot.queryParamMap.get('user');
-    this.user = user;
-    console.log(user)
+   this.userName = sessionStorage.getItem('userName');
   }
 
 }

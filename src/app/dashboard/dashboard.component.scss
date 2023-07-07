@@ -1,0 +1,29 @@
+.dashboard-container {
+    background-color: #fff;
+    padding: 20px;
+  }
+
+  .calendar{
+    width: 46vw;
+    height: 26vw;
+    margin-top: 4vw;
+  }
+  
+  .greeting {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .logout-button {
+    margin-top: 10px;
+  }
+  
+  .calendar-container {
+    margin-top: 20px;
+  }
+  :host ::ng-deep {
+    .p-datepicker-group-container {
+    min-width: 46vw !important;
+    min-height: 21vw !important;
+    }
+  }

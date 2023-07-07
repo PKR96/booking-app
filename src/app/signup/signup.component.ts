@@ -4,6 +4,8 @@ import { RestService } from '../rest/rest.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { UserDTO } from '../user/user.dto';
+import { RoleDTO } from '../user/role.dto';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +20,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = new FormGroup({
       email: new FormControl(''),
       username: new FormControl(''),
-      password: new FormControl(''),
+      password: new FormControl('')
 
     });
   }
@@ -28,24 +30,30 @@ export class SignupComponent implements OnInit {
   }
 
   submit(): void {
-    this.restService.exchangeForm(this.signupForm, '/signup')
+    this.restService.exchangeForm(this.getUserFromFormData(this.signupForm), '/auth/signup')
       .subscribe({
         next: (data:HttpResponse<any>) => {
-          console.log(data)
-          if(data && 200 == data.status){
+          if(data  && 200 === data.status){
             const user = data.body;
-            if(user){
-              console.log(user)
-            this.authService.setJwt(user.token);
-            const userParam = encodeURIComponent(JSON.stringify(user));
-            this.router.navigate(['/dashboard',{queryParams: {user: userParam}}]);
-            }
+            const headers = data.headers;
+            const token:any = 'Bearer '.concat(headers.get('Authorization') + '');
+            this.authService.setJwt(token);
+            sessionStorage.setItem('user',user.userName)
+            this.router.navigate(['/dashboard']);
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.message)
         }
       })
+  }
+
+  private getUserFromFormData(form: FormGroup):UserDTO{
+    const username = form.get('username')?.value;
+    const password = form.get('password')?.value;
+    const email = form.get('email')?.value;
+    const role: RoleDTO = new RoleDTO(null,'GUEST');
+    return new UserDTO(username,email,password,[role]);
   }
 
 }

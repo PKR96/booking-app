@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as jwt from 'jsonwebtoken';
 
 
 @Injectable({
@@ -22,14 +21,14 @@ export class AuthService {
     sessionStorage.removeItem(this.JWT_KEY);
   }
 
-  public isJWTValid(token:string):boolean{
-    try{
-      jwt.verify(token, this.getJwt);
-      return true;
-    }
-    catch(error){
-      console.log(error)
-      return false;
-    }
-  }
+  // public isJWTValid(token:string):boolean{
+  //   try{
+  //     jwt.verify(token, this.getJwt);
+  //     return true;
+  //   }
+  //   catch(error){
+  //     console.log(error)
+  //     return false;
+  //   }
+  // }
 }

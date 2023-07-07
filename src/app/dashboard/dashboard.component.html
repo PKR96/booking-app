@@ -1,1 +1,12 @@
-Hello User, Access Granted
+<div class="dashboard-container">
+    <div class="greeting">Hi, {{ userName }}</div>
+    <button class="logout-button p-button p-button-secondary" type="button">Logout</button>
+  
+    <div class="calendar-container">
+      <p-calendar [(ngModel)]="selectedDate" [minDate]="today" [monthNavigator]="true" [yearNavigator]="true"
+         [showButtonBar]="true"  [showIcon]="true" [showOnFocus]="true" [inline]="true"
+        [showOtherMonths]="true"></p-calendar>
+    </div>
+    
+  </div>
+  
