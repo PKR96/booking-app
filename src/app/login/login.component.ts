@@ -31,12 +31,10 @@ submit(): void {
   this.restService.exchangeForm(this.getUserFromFormData(this.loginForm), '/auth/login')
     .subscribe({
       next: (data:HttpResponse<any>) => {
-        console.log(data)
         if(data && 200 == data.status){
           const user = data.body;
           const headers = data.headers;
           const token:any = 'Bearer '.concat(headers.get('Authorization') + '');
-          console.log(token);
           this.authService.setJwt(token);
           sessionStorage.setItem('user',user.userName)
           this.router.navigate(['/dashboard']);
@@ -50,7 +48,6 @@ submit(): void {
 private getUserFromFormData(form: FormGroup):UserDTO{
   const username = form.get('username')?.value;
   const password = form.get('password')?.value;
-  console.log(password)
   return new UserDTO(username,'',password,[]);
 }
 }

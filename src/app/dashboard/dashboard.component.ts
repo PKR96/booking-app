@@ -59,12 +59,9 @@ export class DashboardComponent implements OnInit {
     .subscribe({
       next:data =>{
       if(data && data.length > 0){
-      console.log(data);
       Array.from(data).forEach(booking => this.bookings.push(booking))
       if(this.bookings.length > 0){
-        console.log(this.bookings)
       let dateTimes: string[] = this.bookings.map(booking => booking.dateTime)
-      console.log(dateTimes)
       if(dateTimes?.length > 0){
       this.mapOfDatesAndTimes = this.getMapOfDatesAndTimes(dateTimes);
       }
@@ -86,7 +83,6 @@ export class DashboardComponent implements OnInit {
 
   private getMapOfDatesAndTimes(datetimeList: string[]): Map<string, string[]>{
     const dateMap: Map<string, string[]> = new Map();
-    console.log(datetimeList)
     datetimeList.forEach((datetime: string) => {
      const array:string[] = datetime.split('T');
      if(array && array.length === 2){
@@ -101,7 +97,6 @@ export class DashboardComponent implements OnInit {
       }
      }
     });
-  console.log(dateMap)
     return dateMap;
   }
 

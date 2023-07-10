@@ -15,7 +15,6 @@ export class RestService {
 
     exchangeForm(data: any, url: string): Observable<any> {
         const apiUrl: string = RestService.URL.concat(url);
-        console.log(apiUrl)
         return this.httpClient.post<any>(apiUrl, data,{headers:this.getHttpHeaders(),observe: 'response'});
     }
 
@@ -37,7 +36,6 @@ export class RestService {
             'Content-Type':'application/json',
             'Authorization' : token ? token : ''
         })
-        console.log(headers);
         return headers;
 
     }

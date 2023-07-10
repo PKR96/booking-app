@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit {
             const user = data.body;
             const headers = data.headers;
             const token:any = 'Bearer '.concat(headers.get('Authorization') + '');
-            console.log(token);
             this.authService.setJwt(token);
             sessionStorage.setItem('user',user.userName)
             this.router.navigate(['/dashboard']);

@@ -20,15 +20,4 @@ export class AuthService {
   public removeJwt(): void {
     sessionStorage.removeItem(this.AUTHORIZATION);
   }
-
-  // public isJWTValid(token:string):boolean{
-  //   try{
-  //     jwt.verify(token, this.getJwt);
-  //     return true;
-  //   }
-  //   catch(error){
-  //     console.log(error)
-  //     return false;
-  //   }
-  // }
 }
