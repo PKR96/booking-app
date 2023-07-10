@@ -5,20 +5,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly JWT_KEY = 'JWT';
+  private readonly AUTHORIZATION ='Authorization';
 
   constructor() { }
 
   public setJwt(token: string): void {
-    sessionStorage.setItem(this.JWT_KEY, token);
+    sessionStorage.setItem(this.AUTHORIZATION, token);
   }
 
   public getJwt(): string | null {
-    return sessionStorage.getItem(this.JWT_KEY);
+    return sessionStorage.getItem(this.AUTHORIZATION);
   }
 
   public removeJwt(): void {
-    sessionStorage.removeItem(this.JWT_KEY);
+    sessionStorage.removeItem(this.AUTHORIZATION);
   }
 
   // public isJWTValid(token:string):boolean{

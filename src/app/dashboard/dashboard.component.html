@@ -1,11 +1,18 @@
 <div class="dashboard-container">
-    <div class="greeting">Hi, {{ userName }}</div>
-    <button class="logout-button p-button p-button-secondary" type="button">Logout</button>
+    <div class="greeting">Hi, {{userName}}</div>
+    <p-button type="button" (onClick)="logout()">Logout</p-button>
   
-    <div class="calendar-container">
-      <p-calendar [(ngModel)]="selectedDate" [minDate]="today" [monthNavigator]="true" [yearNavigator]="true"
-         [showButtonBar]="true"  [showIcon]="true" [showOnFocus]="true" [inline]="true"
+    <div class="calendar-container col-md-12">
+      <div class="col-md-6">
+        <h2>Please select a date first</h2>
+      <p-calendar [(ngModel)]="selectedDate" [minDate]="today" [monthNavigator]="true" [yearNavigator]="true" dateFormat="'dd.mm.y'"
+         [showButtonBar]="true"  [showIcon]="true" [showOnFocus]="true" [inline]="true" [maxDate]="maxDate" (onSelect)="populateDropdownFromSelectedDate()"
         [showOtherMonths]="true"></p-calendar>
+      </div>
+      <div class="col-md-6">
+        <p-dropdown [options]="times" [(ngModel)]="selectedTime" placeholder="Select a time" ></p-dropdown>
+        <p-button label="Book" [disabled]="disabled" (onClick)="submitAppointment()"></p-button>
+      </div>
     </div>
     
   </div>

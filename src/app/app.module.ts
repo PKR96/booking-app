@@ -10,6 +10,7 @@ import { TemplateComponent } from './template/template.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { CalendarModule } from 'primeng/calendar';
     HttpClientModule,
     CalendarModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DropdownModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,21 +16,28 @@ export class RestService {
     exchangeForm(data: any, url: string): Observable<any> {
         const apiUrl: string = RestService.URL.concat(url);
         console.log(apiUrl)
-        return this.httpClient.post<any>(apiUrl, data,{headers:this.getHttpHeaders(data.token),observe: 'response'});
+        return this.httpClient.post<any>(apiUrl, data,{headers:this.getHttpHeaders(),observe: 'response'});
     }
 
-    login(data: any, url: string): Observable<any> {
+    retrieveAvailableBookingSlots(): Observable<any>{
+        const apiUrl: string = RestService.URL.concat('/bookings/0');
+        return this.httpClient.get<any>(apiUrl, {headers:this.getHttpHeaders()});
+    }
+
+    bookAppointment(url:string): Observable<any>{
         const apiUrl: string = RestService.URL.concat(url);
-        return this.httpClient.post<any>(apiUrl, data,{headers:this.getHttpHeaders()});
-
+        console.log(apiUrl)
+        return this.httpClient.post<any>(apiUrl,null,{headers:this.getHttpHeaders(),observe: 'response'});
     }
 
 
-    private getHttpHeaders(token?:string):HttpHeaders{
+    private getHttpHeaders():HttpHeaders{
+        const token = sessionStorage.getItem('Authorization');
         const headers = new HttpHeaders({
             'Content-Type':'application/json',
-            'Authorization' : token? token : ''
+            'Authorization' : token ? token : ''
         })
+        console.log(headers);
         return headers;
 
     }
