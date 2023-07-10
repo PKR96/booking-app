@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   maxDate: Date= new Date();
   bookings: any[] = [];
   bookingDates: Date[] = [];
-  times:string[]=[]
+  times:any[]=[]
   selectedTime:string = '';
   mapOfDatesAndTimes:Map<string, string[]> = new Map<string,string[]>();
   formattedDate:string =''
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next:(data)=>{
         console.log("Data Saved")
+        this.ngOnInit();
         },
         error:(err:HttpErrorResponse)=>{
           console.log(err)
@@ -49,17 +50,8 @@ export class DashboardComponent implements OnInit {
   }
 
   logout():void{
-    console.log('wawa')
     sessionStorage.clear();
     this.router.navigate(['/login']);
-  }
-
-  updateDropdownWithTimes(date:Date){
-    this.times=[];
-    const dateKey: string = date.toISOString().slice(0, 10);
-    let dateTimes = this.mapOfDatesAndTimes.get(dateKey);
-    dateTimes?.forEach(time => this.times.push(time));
-
   }
 
   private retrieveAvailableAppointments(): void{
@@ -88,7 +80,7 @@ export class DashboardComponent implements OnInit {
   populateDropdownFromSelectedDate(){
   this.times=[];
    this.formattedDate = this.selectedDate.toLocaleString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
-   this.mapOfDatesAndTimes.get(this.formattedDate)?.forEach(time => this.times.push(time))
+   this.mapOfDatesAndTimes.get(this.formattedDate)?.forEach(time => this.times.push({label:time.slice(0,5),value:time}))
   }
 
 
@@ -99,7 +91,7 @@ export class DashboardComponent implements OnInit {
      const array:string[] = datetime.split('T');
      if(array && array.length === 2){
       const date: string = array[0];
-      const time: string = array[1].slice(0,5);
+      const time: string = array[1];
 
       if(dateMap.get(date)){
         dateMap.get(date)?.push(time)

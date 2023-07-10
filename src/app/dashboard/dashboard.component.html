@@ -5,13 +5,13 @@
     <div class="calendar-container col-md-12">
       <div class="col-md-6">
         <h2>Please select a date first</h2>
-      <p-calendar [(ngModel)]="selectedDate" [minDate]="today" [monthNavigator]="true" [yearNavigator]="true" dateFormat="'dd.mm.y'"
+      <p-calendar [(ngModel)]="selectedDate" [minDate]="today" [monthNavigator]="true" [yearNavigator]="true" optionLabel="label" optionValue="value"
          [showButtonBar]="true"  [showIcon]="true" [showOnFocus]="true" [inline]="true" [maxDate]="maxDate" (onSelect)="populateDropdownFromSelectedDate()"
         [showOtherMonths]="true"></p-calendar>
       </div>
       <div class="col-md-6">
         <p-dropdown [options]="times" [(ngModel)]="selectedTime" placeholder="Select a time" ></p-dropdown>
-        <p-button label="Book" [disabled]="disabled" (onClick)="submitAppointment()"></p-button>
+        <p-button label="Book" [disabled]="disabled" (onClick)="submitAppointment()" routerLink="."></p-button>
       </div>
     </div>
     
